@@ -4,33 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quest Ventures — Internal Tools</title>
+<meta name="color-scheme" content="light">
 <style>
   :root {
-    --bg: #f5f6f8;
+    --bg: #fafafa;
     --surface: #ffffff;
-    --border: #e2e4e9;
-    --text: #1a1d24;
-    --text-muted: #5b6270;
-    --accent: #1f4b99;
-    --accent-soft: #eaf0fb;
+    --border: #e9e9ea;
+    --text: #1c1e22;
+    --text-muted: #6b6f76;
+    --accent: #1596c8;
+    --accent-soft: #eaf6fb;
     --badge-bg: #0f7a4a;
     --badge-text: #ffffff;
-    --shadow: 0 1px 2px rgba(16,18,24,0.04), 0 4px 12px rgba(16,18,24,0.05);
+    --shadow: 0 1px 2px rgba(20,20,25,0.03), 0 8px 24px rgba(20,20,25,0.04);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f1115;
-      --surface: #171a21;
-      --border: #2a2e38;
-      --text: #eceef2;
-      --text-muted: #9aa1ae;
-      --accent: #6f9ceb;
-      --accent-soft: #1c2636;
-      --badge-bg: #1a9c63;
-      --badge-text: #08120d;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.35);
-    }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
   }
 
   * { box-sizing: border-box; }
@@ -41,27 +32,43 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.5;
+    overflow-x: hidden;
   }
 
+  .topbar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-mark {
+    height: 34px;
+    display: block;
+  }
+
+  .logo-fallback {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    display: none;
+  }
+
+  .logo-fallback .accent { color: var(--accent); }
+
   header {
-    padding: 48px 24px 32px;
+    padding: 40px 24px 32px;
     max-width: 1100px;
     margin: 0 auto;
   }
 
-  .eyebrow {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-
   h1 {
-    font-size: 32px;
-    margin: 0 0 8px;
-    font-weight: 700;
+    font-size: 34px;
+    margin: 0 0 10px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
   }
 
   header p {
@@ -74,7 +81,7 @@
   main {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 24px 64px;
+    padding: 0 24px 80px;
   }
 
   .grid {
@@ -86,12 +93,13 @@
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 24px;
+    border-radius: 16px;
+    padding: 26px;
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
     gap: 14px;
+    will-change: transform, opacity;
   }
 
   .card-top {
@@ -166,7 +174,7 @@
     text-decoration: none;
     border: 1px solid var(--border);
     color: var(--text);
-    transition: border-color 0.15s ease, background 0.15s ease;
+    transition: border-color 0.15s ease, transform 0.15s ease;
   }
 
   .btn.primary {
@@ -177,6 +185,7 @@
 
   .btn:hover {
     border-color: var(--accent);
+    transform: translateY(-1px);
   }
 
   .pending {
@@ -197,8 +206,13 @@
 </head>
 <body>
 
+<div class="topbar">
+  <img src="assets/logo.png" alt="Quest Ventures" class="logo-mark" id="logo-img"
+       onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+  <span class="logo-fallback" id="logo-fallback"><span class="accent">Quest</span> Ventures</span>
+</div>
+
 <header>
-  <div class="eyebrow">Quest Ventures</div>
   <h1>Internal Tools</h1>
   <p>A directory of internal tools and platforms in use across the team, with points of contact for each.</p>
 </header>
@@ -277,6 +291,46 @@
 <footer>
   Quest Ventures — Internal Tools Directory
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".topbar img, .topbar .logo-fallback", {
+    opacity: 0, y: -10, duration: 0.6, ease: "power2.out"
+  });
+
+  gsap.from("header h1, header p", {
+    opacity: 0, y: 16, duration: 0.7, ease: "power2.out", stagger: 0.08, delay: 0.1
+  });
+
+  gsap.utils.toArray(".card").forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 88%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      y: 28,
+      duration: 0.6,
+      ease: "power2.out",
+      delay: (i % 3) * 0.06
+    });
+  });
+
+  gsap.from("footer", {
+    scrollTrigger: {
+      trigger: "footer",
+      start: "top 95%"
+    },
+    opacity: 0,
+    y: 12,
+    duration: 0.5,
+    ease: "power2.out"
+  });
+</script>
 
 </body>
 </html>
