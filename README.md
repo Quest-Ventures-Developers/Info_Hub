@@ -1,3 +1,4 @@
 # Information Hub 
 
-A hub to gather all information about Quest Ventures internal tools and PIC of each tools 
+A directory of internal tools and platforms in use across the team, with points of contact for each.
+
