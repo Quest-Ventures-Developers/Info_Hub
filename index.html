@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quest Ventures — Internal Tools</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --border: #e2e4e9;
+    --text: #1a1d24;
+    --text-muted: #5b6270;
+    --accent: #1f4b99;
+    --accent-soft: #eaf0fb;
+    --badge-bg: #0f7a4a;
+    --badge-text: #ffffff;
+    --shadow: 0 1px 2px rgba(16,18,24,0.04), 0 4px 12px rgba(16,18,24,0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --surface: #171a21;
+      --border: #2a2e38;
+      --text: #eceef2;
+      --text-muted: #9aa1ae;
+      --accent: #6f9ceb;
+      --accent-soft: #1c2636;
+      --badge-bg: #1a9c63;
+      --badge-text: #08120d;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.35);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  header {
+    padding: 48px 24px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+    font-weight: 700;
+  }
+
+  header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 0;
+    max-width: 620px;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .card h2 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 650;
+  }
+
+  .category {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--badge-bg);
+    color: var(--badge-text);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 8px;
+    width: fit-content;
+  }
+
+  .meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: auto;
+    display: grid;
+    gap: 4px;
+  }
+
+  .meta strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .btn {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .btn.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .btn:hover {
+    border-color: var(--accent);
+  }
+
+  .pending {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Quest Ventures</div>
+  <h1>Internal Tools</h1>
+  <p>A directory of internal tools and platforms in use across the team, with points of contact for each.</p>
+</header>
+
+<main>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-top">
+        <h2>Galactic Roam</h2>
+        <span class="category">Travel · eSIM</span>
+      </div>
+      <p class="desc">Global eSIM data plans for travel — instant activation, no physical SIM required.</p>
+      <span class="badge">25% off — exclusive for Quest Ventures staff</span>
+      <p class="desc">Quest Ventures is a Galactic Roam affiliate. Sign up through the affiliate program to earn rewards.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://galacticroam.com" target="_blank" rel="noopener">Visit site</a>
+        <a class="btn" href="https://galacticroam.com/affiliate" target="_blank" rel="noopener">Affiliate program</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h2>DD Tools</h2>
+        <span class="category">Due Diligence</span>
+      </div>
+      <p class="desc">Internal due diligence research and analysis tool.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:tech@questventures.com">Login via tech@questventures.com</a>
+      </div>
+      <div class="meta">
+        <div><strong>PIC (Tech):</strong> Le Qi Yau</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h2>Podcast Automation Tool</h2>
+        <span class="category">Podcast</span>
+      </div>
+      <p class="desc">Automates podcast production and intelligence workflows.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://podcast-intelligence-web-611389687184.asia-southeast1.run.app/" target="_blank" rel="noopener">Open tool</a>
+      </div>
+      <div class="meta">
+        <div><strong>PIC (Tech):</strong> Zoe Pham</div>
+        <div><strong>PIC (Podcast):</strong> Mindy Xuan</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h2>Supply Chain Analysis</h2>
+        <span class="category">Analytics</span>
+      </div>
+      <p class="desc">Supply chain and stock prediction analytics platform.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://stock-prediction-platform-717563730158.asia-southeast3.run.app/" target="_blank" rel="noopener">Open tool</a>
+      </div>
+      <div class="meta">
+        <div><strong>PIC:</strong> Le Qi Yau</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h2>VCA</h2>
+        <span class="category">Internal</span>
+      </div>
+      <p class="pending">Details coming soon.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  Quest Ventures — Internal Tools Directory
+</footer>
+
+</body>
+</html>
